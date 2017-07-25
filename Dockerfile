@@ -123,6 +123,7 @@ WORKDIR /root/src/fmriprep
 # Change permissions of wheel files
 WORKDIR /usr/local/miniconda/bin
 RUN python /usr/local/miniconda/bin/fmriprep -h > /dev/null 2>&1
+RUN chmod +x /usr/local/miniconda/lib/python3.6/site-packages/*
 RUN ldconfig
 ENTRYPOINT ["/usr/local/miniconda/bin/fmriprep"]
 
