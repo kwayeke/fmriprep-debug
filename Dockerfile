@@ -84,7 +84,7 @@ RUN conda install -y mkl=2017.0.1 mkl-service &&  \
     chmod +x /usr/local/miniconda/bin/*
 
 # Change permissions of wheel files
-chmod 0775 /usr/local/miniconda/lib/python3.6/site-packages/.wh.conda-4.3.11-py3.6.egg-info
+RUN chmod 0775 /usr/local/miniconda/lib/python3.6/site-packages/.wh.conda-4.3.11-py3.6.egg-info
 
 # Precaching fonts
 RUN python -c "from matplotlib import font_manager"
