@@ -113,17 +113,17 @@ RUN cd /root/src/fmriprep && \
 RUN mkdir /niworkflows_data
 ENV CRN_SHARED_DATA /niworkflows_data
 RUN python -c 'from niworkflows.data.getters import get_mni_template_ras; get_mni_template_ras()' && \
-    python -c 'from niworkflows.data.getters import get_mni_icbm152_nlin_asym_09c; get_mni_icbm152_nlin_asym_09c()' && \
+    python -c 'from niworkflows.data.getters import get_mni_icbm152_nlin_asym_09c; get_mni_icbm152_nlin_asym_09c()' #&& \
     python -c 'from niworkflows.data.getters import get_ants_oasis_template_ras; get_ants_oasis_template_ras()' 
 
 RUN ldconfig
 
 WORKDIR /root/src/fmriprep
 
-
 # Change permissions of wheel files
-RUN chmod 0775 /usr/local/miniconda/lib/python3.6/site-packages/.wh.conda-4.3.11-py3.6.egg-info
-
+WORKDIR /usr/local/miniconda/bin
+RUN python /usr/local/miniconda/bin/fmriprep -h > /dev/null 2>&1
+RUN ldconfig
 ENTRYPOINT ["/usr/local/miniconda/bin/fmriprep"]
 
 ARG BUILD_DATE
