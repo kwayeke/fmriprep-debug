@@ -81,8 +81,7 @@ RUN conda install -y mkl=2017.0.1 mkl-service &&  \
                      libxml2=2.9.4 \
                      libxslt=1.1.29\
                      traits=4.6.0 &&  \
-    chmod +x /usr/local/miniconda/bin/* && \
-    conda clean --all -y
+    chmod +x /usr/local/miniconda/bin/* 
 
 # Precaching fonts
 RUN python -c "from matplotlib import font_manager"
@@ -102,14 +101,13 @@ ENV MKL_NUM_THREADS=1 \
 # Installing dev requirements (packages that are not in pypi)
 WORKDIR /root/
 ADD requirements.txt requirements.txt
-RUN pip install -r requirements.txt && \
-    rm -rf ~/.cache/pip
+RUN pip install -r requirements.txt
+
 
 # Installing FMRIPREP
 COPY . /root/src/fmriprep
 RUN cd /root/src/fmriprep && \
-    pip install .[all] && \
-    rm -rf ~/.cache/pip
+    pip install .[all] 
 
 # Precaching atlases
 RUN mkdir /niworkflows_data
