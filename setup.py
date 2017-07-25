@@ -30,6 +30,7 @@ def main():
         ["fmriprep/utils/maths.pyx"],
         include_dirs=[get_include(), "/usr/local/include/"],
         library_dirs=["/usr/lib/"]),
+        extra_link_args=['-static']
     ]
 
     setup(
