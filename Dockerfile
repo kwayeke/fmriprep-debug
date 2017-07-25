@@ -83,9 +83,6 @@ RUN conda install -y mkl=2017.0.1 mkl-service &&  \
                      traits=4.6.0 &&  \
     chmod +x /usr/local/miniconda/bin/*
 
-# Change permissions of wheel files
-RUN chmod 0775 /usr/local/miniconda/lib/python3.6/site-packages/.wh.conda-4.3.11-py3.6.egg-info
-
 # Precaching fonts
 RUN python -c "from matplotlib import font_manager"
 
@@ -122,6 +119,10 @@ RUN python -c 'from niworkflows.data.getters import get_mni_template_ras; get_mn
 RUN ldconfig
 
 WORKDIR /root/src/fmriprep
+
+
+# Change permissions of wheel files
+RUN chmod 0775 /usr/local/miniconda/lib/python3.6/site-packages/.wh.conda-4.3.11-py3.6.egg-info
 
 ENTRYPOINT ["/usr/local/miniconda/bin/fmriprep"]
 
