@@ -126,6 +126,7 @@ WORKDIR /usr/local/miniconda/bin
 RUN python /usr/local/miniconda/bin/fmriprep -h > /dev/null 2>&1
 RUN chmod +x /usr/local/miniconda/lib/python3.6/site-packages/*
 RUN ldconfig
+RUN rm /usr/local/miniconda/lib/python3.6/site-packages/.wh.conda-4.3.11-py3.6.egg-info
 ENTRYPOINT ["/usr/local/miniconda/bin/fmriprep"]
 
 ARG BUILD_DATE
