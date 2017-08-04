@@ -101,13 +101,14 @@ ENV MKL_NUM_THREADS=1 \
 # Installing dev requirements (packages that are not in pypi)
 WORKDIR /root/
 ADD requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-
+RUN pip wheel --wheel-dir=/tmp -r requirements.txt
+RUN pip install --no-index --find-links=/tmp -r requirements.txt
 
 # Installing FMRIPREP
 COPY . /root/src/fmriprep
 RUN cd /root/src/fmriprep && \
-    pip install .[all] 
+    pip wheel --wheel-dir=/tmp .[all] && \
+    pip install --no-index --find-links=/tmp .[all]
 
 # Precaching atlases
 RUN mkdir /niworkflows_data
